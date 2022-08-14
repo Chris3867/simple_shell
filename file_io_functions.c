@@ -85,20 +85,20 @@ int read_history(info_t *info)
 	close(fd);
 
 	for (i = 0; i < fsize; i++)
-		if (buf[i] == '\n')
-		{
-			buf[i] = 0;
-			build_history_list(info, buf + last, linecount++);
-			last = i + 1;
-		}
-		if (last != i)
-			build_history_list(info, buf + last, linecount++);
-		free(buf);
-		info->histcount = linecount;
-		while (info->histcount-- >= HIST_MAX)
-			delete_node_at_index(&(info->history), 0);
-		renumber_history(info);
-		return (info->histcount);
+	if (buf[i] == '\n')
+	{
+		buf[i] = 0;
+		build_history_list(info, buf + last, linecount++);
+		last = i + 1;
+	}
+	if (last != i)
+		build_history_list(info, buf + last, linecount++);
+	free(buf);
+	info->histcount = linecount;
+	while (info->histcount-- >= HIST_MAX)
+		delete_node_at_index(&(info->history), 0);
+	renumber_history(info);
+	return (info->histcount);
 }
 
 /**
