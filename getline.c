@@ -69,7 +69,7 @@ ssize_t get_input(info_t *info)
 		{
 			if (is_chain(info, buf, &j))
 				break;
-			j++
+			j++;
 		}
 
 		i = j + 1; /* increment past nulled ';'' */
